@@ -1,10 +1,15 @@
+html {
+      background-color: gray;
+}
 .road {
-      border-bottom: 100px solid red;
-      border-left: 25px solid transparent;
-      border-right: 25px solid transparent;
-      margin-left: 250px;
+      border-bottom: 200px solid red;
+      border-left: 30px solid white;
+      border-right: 30px solid white;
+      margin-left: 360px;
       margin-right: 860px;
-      height: 450px;
+      height: 490px;
       width: 500px;
       display: block;
+      transform: rotate3d( 45deg, 45deg, 45deg );
+      background-color: black;
     }
