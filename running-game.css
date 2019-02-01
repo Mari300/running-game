@@ -2,12 +2,12 @@ html {
       background-color: gray;
 }
 #container { 
- height: 800px; 
- width: 1000px; 
+ height: 500px; 
+ width: 900px; 
  border: 5px black solid; 
  position: absolute; 
  background-color: white;
- margin-left: 150px;
+ margin-left: 180px;
  margin-top: 50px;
  border-radius: 15px;
 } 
@@ -22,16 +22,14 @@ html {
  color: #fff;
  padding: 20px;
  font-weight: 800;
- margin-top: 400px;
+ margin-top: 255px;
 }
 #stage {
     position: absolute;
     background-color: green;
     height: 100px;
-    width: 994px;
-    margin-top: 550px;
-    border-radius: 20px;
+    width: 895px;
+    border-radius: 10px;
     border: solid gray;
     display: block;
-    border-box: 10px;
 }
