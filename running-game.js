@@ -3,8 +3,8 @@ var context, controller, loop;
 
 context = document.querySelector("canvas").getContext("2d");
 
-context.canvas.height = 1000;
-context.canvas.width = 1000;
+context.canvas.height = 500;
+context.canvas.width = 900;
 
 var rectangle = document.getElementById("person");
 
@@ -75,10 +75,10 @@ loop = function() {
   rectangle.y_velocity *= 0.9;// friction
 
   // if rectangle is falling below floor line
-  if (rectangle.y > 180 - 16 - 32) {
+  if (rectangle.y > 390 - 50 - 0) {
 
     rectangle.jumping = false;
-    rectangle.y = 180 - 16 - 32;
+    rectangle.y = 390 - 50 - 0;
     rectangle.y_velocity = 0;
 
   }
@@ -102,8 +102,8 @@ loop = function() {
   context.strokeStyle = "#202830";
   context.lineWidth = 4;
   context.beginPath();
-  context.moveTo(0, 164);
-  context.lineTo(900, 164);
+  context.moveTo(100, 395);
+  context.lineTo(810, 395);
   context.stroke();
 
   // call update when the browser is ready to draw again
