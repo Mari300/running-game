@@ -1,21 +1,22 @@
 $( document ).ready(function() {
-rectangle = document.getElementById("person")
-var context, controller, rectangle, loop;
+var context, controller, loop;
 
-context = document.querySelector("#container");
+context = document.querySelector("canvas").getContext("2d");
 
-context.canvas.height = 180;
-context.canvas.width = 320;
+context.canvas.height = 1000;
+context.canvas.width = 1000;
+
+var rectangle = document.getElementById("person");
 
 rectangle = {
-
-  height:32,
-  jumping:true,
-  width:32,
-  x:144, // center of the canvas
-  x_velocity:0,
-  y:0,
-  y_velocity:0
+  marginTop: 100,
+  height: 50 ,
+  jumping: true ,
+  width: 50 ,
+  x: 200, // center of the canvas
+  x_velocity: 0,
+  y: 0,
+  y_velocity: 0
 
 };
 
@@ -85,16 +86,15 @@ loop = function() {
   // if rectangle is going off the left of the screen
   if (rectangle.x < -32) {
 
-    rectangle.x = 320;
+    rectangle.x = 850;
 
-  } else if (rectangle.x > 320) {// if rectangle goes past right boundary
+  } else if (rectangle.x > 850) {// if rectangle goes past right boundary
 
     rectangle.x = -32;
 
   }
-
   context.fillStyle = "#202020";
-  context.fillRect(0, 0, 320, 180);// x, y, width, height
+  context.fillRect(0, 0, 900, 500);// x, y, width, height
   context.fillStyle = "#ff0000";// hex for red
   context.beginPath();
   context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
@@ -103,7 +103,7 @@ loop = function() {
   context.lineWidth = 4;
   context.beginPath();
   context.moveTo(0, 164);
-  context.lineTo(320, 164);
+  context.lineTo(900, 164);
   context.stroke();
 
   // call update when the browser is ready to draw again
@@ -114,4 +114,4 @@ loop = function() {
 window.addEventListener("keydown", controller.keyListener);
 window.addEventListener("keyup", controller.keyListener);
 window.requestAnimationFrame(loop);
-)};
+});
