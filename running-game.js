@@ -1,12 +1,28 @@
 $( document ).ready(function() {
 var context, controller, loop;
 
-context = document.querySelector("canvas").getContext("2d");
+var context = document.querySelector("canvas").getContext("2d");
+var rectangle = document.getElementById("person");
+var obstacle = document.getElementById("obstacle");
 
 context.canvas.height = 500;
 context.canvas.width = 900;
-
-var rectangle = document.getElementById("person");
+/*context.canvas.interval = setInterval(updateCanvas, 20);
+function clear () { 
+  context.clearRect(0, 0, context.canvas.width,  context.canvas.height);
+}
+function update () {
+  context.canvas
+  context.fillStyle = color;
+        context.fillRect(this.x, this.y, this.width, this.height);
+    }
+function updateCanvas() {
+    if (rectangle.crashWith(obstacle)) {
+    rectangle.newPos();
+    rectangle.clear();
+    rectangle.update();
+}
+*/
 
 rectangle = {
   marginTop: 100,
@@ -17,8 +33,15 @@ rectangle = {
   x_velocity: 0,
   y: 0,
   y_velocity: 0
+    
+}
 
-};
+obstacle = {
+   x: 250,
+   y: 315,
+   width: 75,
+   height: 75
+ };
 
 controller = {
 
@@ -42,11 +65,9 @@ controller = {
       break;
 
     }
-
-  }
-
+ }
 };
-
+ 
 loop = function() {
 
   if (controller.up && rectangle.jumping == false) {
@@ -67,12 +88,14 @@ loop = function() {
     rectangle.x_velocity += 0.5;
 
   }
-
-  rectangle.y_velocity += 1.5;// gravity
   rectangle.x += rectangle.x_velocity;
   rectangle.y += rectangle.y_velocity;
-  rectangle.x_velocity *= 0.9;// friction
-  rectangle.y_velocity *= 0.9;// friction
+  rectangle.y_velocity += 0.8;// gravity
+  rectangle.x_velocity *= 0.95;// friction
+  rectangle.y_velocity *= 0.95;// friction
+  /* rectangle.newPos = function() {
+    
+  }*/
 
   // if rectangle is falling below floor line
   if (rectangle.y > 390 - 50 - 0) {
@@ -86,9 +109,9 @@ loop = function() {
   // if rectangle is going off the left of the screen
   if (rectangle.x < -32) {
 
-    rectangle.x = 850;
+    rectangle.x = 855;
 
-  } else if (rectangle.x > 850) {// if rectangle goes past right boundary
+  } else if (rectangle.x > 855) {// if rectangle goes past right boundary
 
     rectangle.x = -32;
 
@@ -100,12 +123,19 @@ loop = function() {
   context.rect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
   context.fill();
   context.strokeStyle = "#202830";
-  context.lineWidth = 4;
+  context.lineWidth = 10;
   context.beginPath();
-  context.moveTo(100, 395);
-  context.lineTo(810, 395);
+  context.moveTo(100, 395); // line length
+  context.lineTo(810, 395); // line length
   context.stroke();
-
+  
+ //Obstacle
+  context.fillStyle = 'green';
+  context.beginPath();
+  context.rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+  context.fill();
+  
+ 
   // call update when the browser is ready to draw again
   window.requestAnimationFrame(loop);
 
