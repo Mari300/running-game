@@ -4,6 +4,10 @@ var context, controller, loop;
 var context = document.querySelector("canvas").getContext("2d");
 var rectangle = document.getElementById("person");
 var obstacle = document.getElementById("obstacle");
+  
+ 
+
+
 
 context.canvas.height = 500;
 context.canvas.width = 900;
@@ -34,14 +38,15 @@ rectangle = {
   y: 0,
   y_velocity: 0
     
-}
+};
 
 obstacle = {
-   x: 250,
-   y: 315,
+  marginTop: 100,
+   x: 450,
+   y: 316,
    width: 75,
-   height: 75
- };
+   height: 75,
+};
 
 controller = {
 
@@ -93,6 +98,14 @@ loop = function() {
   rectangle.y_velocity += 0.8;// gravity
   rectangle.x_velocity *= 0.95;// friction
   rectangle.y_velocity *= 0.95;// friction
+  
+  var reset = function () {
+  // Reset player's position to centre of canvas
+  rectangle.x = 200,
+  rectangle.y = 0
+  }
+  
+
   /* rectangle.newPos = function() {
     
   }*/
@@ -116,6 +129,12 @@ loop = function() {
     rectangle.x = -32;
 
   }
+   var background = new Image();
+  background.src = "background.png"
+  // show the background image
+  background.onload = function(){
+    context.drawImage(background,0,0);   
+}
   context.fillStyle = "#202020";
   context.fillRect(0, 0, 900, 500);// x, y, width, height
   context.fillStyle = "#ff0000";// hex for red
@@ -134,6 +153,16 @@ loop = function() {
   context.beginPath();
   context.rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
   context.fill();
+  
+  if (
+    rectangle.x <= (obstacle.x + 32)
+    && obstacle.x <= (rectangle.x + 32)
+    && rectangle.y <= (obstacle.y + 32)
+    && obstacle.y <= (rectangle.y + 32)
+  ) {
+    reset();
+  }
+
   
  
   // call update when the browser is ready to draw again
